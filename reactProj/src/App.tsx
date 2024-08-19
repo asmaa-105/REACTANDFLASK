@@ -1,9 +1,24 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import Yolo from './assets/yolo4.jpg'
+import Yolo2 from './assets/yolo5.jpg'
 
 const App: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [classification, setClassification] = useState<string>("");
   const [croppedImageUrl, setCroppedImageUrl] = useState<string>("");
+
+    const[click,setClick]= useState(false)
+    const handleClick =()=> setClick(!click)
+
+    const[color,setColor]=useState(false)
+    const changeColor=()=> {
+        if(window.scrollY>=100){
+            setColor(true)
+        } else{
+            setColor(false)
+        }
+    }
+    window.addEventListener('scroll',changeColor)
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     //State variables themselves are read-only and should not be modified directly. To update state values, you use the provided updater functions
@@ -49,6 +64,11 @@ const App: React.FC = () => {
 
   return (
     <div>
+       <div className='img-container'>
+                <div className='img-stack top'>
+                    <img src={Yolo} className='img' alt=''/>
+                </div>
+        </div>
       <h1>Image Classification and Cropping </h1>
       <form onSubmit={handleSubmit}>
         <input type="file" onChange={handleFileChange} />
@@ -67,6 +87,11 @@ const App: React.FC = () => {
           )}
         </div>
       )}
+      <div className='img-container2'>
+                <div className='img-stack top2'>
+                    <img src={Yolo2} className='img2' alt=''/>
+                </div>
+        </div>
     </div>
   );
 };
